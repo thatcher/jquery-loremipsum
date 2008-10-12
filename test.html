@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="jquery.loremipsum.js"></script>
+        <script type="text/javascript" >
+        (function($){
+	        $(document).ready(function(){
+	        	//An Uppercased title for the document
+	        	document.title = "jQuery " + $.titled(3,false);
+	        	
+	        	//5 words 
+	        	$("#header00").text($.words(5));
+	        	
+	        	//5 words all ways the same
+	        	$("#sentence00").text($.sentence());
+	        	
+	        	//5 words all ways the same
+	        	$("#paragraph00").text($.paragraph());
+	        	
+	        	//2 'uncommon' words 
+	        	$("#header01").text($.titled(2, false));
+	        	
+	        	//some random words for a list
+	        	$("#wordlist00 li").each(function(){
+	        		$(this).text($.words(3, false));
+	        	});
+	        	
+	        	//some paragraphs
+	        	$.each($.paragraphs(5), function(count, para){
+	        		$("#content00").append("<p>"+para+"</p>");
+	        	});
+	        });
+        })(jQuery);
+        </script>
+    </body>
+    <h1 id="header00"></h1>
+    <p id="sentence00"></p>
+    <p id="paragraph00"></p>
+    <h2 id="header01"></h2>
+    <ul id="wordlist00">
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    </ul>
+    <div id="content00"></div>
+    
+</html>
