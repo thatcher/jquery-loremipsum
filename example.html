@@ -6,37 +6,48 @@
         <title></title>
     </head>
     <body>
-        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="test/jquery.js"></script>
+        <script type="text/javascript" src="../jquery-jspath/jquery.jspath.js">
+            <!--
+            /**
+             * for this example to work you need to download 
+             * 
+             *     - http://github.com/thatcher/jquery-jspath -
+             *     
+             * into the same folder that holds this project.
+             */ 
+             -->
+        </script>
         <script type="text/javascript" src="jquery.loremipsum.js"></script> 
         <script type="text/javascript" >
-        (function($){
+        (function($, _){
 	        $(document).ready(function(){
 	        	//An Uppercased title for the document
-	        	document.title = "jQuery " + $.titled(3,false);
+	        	document.title = "jQuery " + _.titled(3,false);
 	        	
 	        	//5 words 
-	        	$("#header00").text($.words(5));
+	        	$("#header00").text(_.words(5));
 	        	
 	        	//5 words all ways the same
-	        	$("#sentence00").text($.sentence());
+	        	$("#sentence00").text(_.sentence());
 	        	
 	        	//5 words all ways the same
-	        	$("#paragraph00").text($.paragraph());
+	        	$("#paragraph00").text(_.paragraph());
 	        	
 	        	//2 'uncommon' words 
-	        	$("#header01").text($.titled(2, false));
+	        	$("#header01").text(_.titled(2, false));
 	        	
 	        	//some random words for a list
 	        	$("#wordlist00 li").each(function(){
-	        		$(this).text($.words(3, false));
+	        		$(this).text(_.words(3, false));
 	        	});
 	        	
 	        	//some paragraphs
-	        	$.each($.paragraphs(5), function(count, para){
+	        	$.each(_.paragraphs(5), function(count, para){
 	        		$("#content00").append("<p>"+para+"</p>");
 	        	});
 	        });
-        })(jQuery);
+        })(jQuery, jsPath);
         </script>
     </body>
     <h1 id="header00"></h1>

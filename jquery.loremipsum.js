@@ -1,13 +1,15 @@
-(function($){
 /**
-*	Chris Thatcher - claypooljs.com
-*
-* 	Ported with love (and little change or effort) from the 
-*	Django Python Application Framework (djangoproject.com)
-*	"""
-*	Utility functions for generating "lorem ipsum" Latin text.
-*	"""
-*/
+ *  @depends_on jquery-jspath ( http://github.com/thatcher/jquery-jspath )
+ * 
+ *	Chris Thatcher - claypooljs.com
+ *
+ * 	Ported with love (and little change or effort) from the 
+ *	Django Python Application Framework (djangoproject.com)
+ *	"""
+ *	Utility functions for generating "lorem ipsum" Latin text.
+ *	"""
+ */
+(function($, _){
 
 	var COMMON_P = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
@@ -45,7 +47,7 @@
         'adipisicing', 'elit', 'sed', 'do', 'eiusmod', 'tempor', 'incididunt',
         'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua'];
 
-	$.sentence = function(){
+	_.sentence = function(){
 	    /*"""
 	    Returns a randomly generated sentence of lorem ipsum text.
 	
@@ -63,7 +65,7 @@
 	    return (s.charAt(0).toUpperCase() + s.slice(1) + randomLetter('?.'));
 	};
 
-	$.paragraph = function(){
+	_.paragraph = function(){
 	    /*"""
 	    Returns a randomly generated paragraph of lorem ipsum text.
 	
@@ -72,11 +74,11 @@
 	    var paragraph = [];
 	    var range = randomNumber(1,4);
 	    for(var i=0;i<range;i++){
-	    	paragraph.push($.sentence());
+	    	paragraph.push(_.sentence());
 	    } return paragraph.join(' ');
 	};
 
-	$.paragraphs = function(count, common){
+	_.paragraphs = function(count, common){
 		common = (common===null)?true:common;
 	    /*"""
 	    Returns a list of paragraphs as returned by paragraph().
@@ -90,11 +92,11 @@
 	        if (common && i == 0)
 	            paras = paras.concat(COMMON_P);
 	        else
-	            paras = paras.concat($.paragraph());
+	            paras = paras.concat(_.paragraph());
 	    } return paras;
 	};
 
-	$.words = function(count, common){
+	_.words = function(count, common){
 		common = (common===null)?true:common;
 	    /*"""
 	    Returns a string of `count` lorem ipsum words separated by a single space.
@@ -117,10 +119,10 @@
 	    } return word_list.join(' ');
 	};
 
-	$.titled = function(count, common){
+	_.titled = function(count, common){
 		//a convience function to upper case the resulting words
 		var title = [];
-		var words = $.words(count, common);
+		var words = _.words(count, common);
 		$.each(words.split(' '), function(pos, word){
 			title.push(word.charAt(0).toUpperCase()+word.slice(1));
 		}); return title.join(' ');
@@ -141,4 +143,4 @@
 	var randomLetter = function(letters){
 		return letters.charAt(randomNumber(0, letters.length-1));
 	};
-})(jQuery);
+})(jQuery, jsPath);

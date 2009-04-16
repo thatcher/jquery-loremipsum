@@ -1,4 +1,4 @@
-(function($){
+(function(_){
 	
   	// RSpec/Bacon Style
 	with (jqUnit) {
@@ -8,15 +8,15 @@
 			before: function(){
 			}
 		}).it('should be a function', function(){
-			isType($.words, Function);
+			isType(_.words, Function);
 		}).it('should be a function', function(){
-			isType($.paragraphs, Function);
+			isType(_.paragraphs, Function);
 		}).it('should be a function', function(){
-			isType($.titled, Function);
+			isType(_.titled, Function);
 		}).it('should be a function', function(){
-			isType($.sentence, Function);
+			isType(_.sentence, Function);
 		}).it('should be a function', function(){
-			isType($.paragraph, Function);
+			isType(_.paragraph, Function);
 		}).pending('should do something awesome', function(){
 			// It doesnt matter what you put here it wont be run until
 			// you change this to an actual spec
@@ -26,4 +26,4 @@
 		
 	}
     
-})(jQuery);
+})(jsPath);
