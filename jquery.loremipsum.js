@@ -47,7 +47,52 @@
         'adipisicing', 'elit', 'sed', 'do', 'eiusmod', 'tempor', 'incididunt',
         'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua'];
 
-	_.sentence = function(){
+    
+
+	_.words = function(count, common){
+	    /*"""
+	    Returns a string of `count` lorem ipsum words separated by a single space.
+	
+	    If `common` is True, then the first 19 words will be the standard
+	    'lorem ipsum' words. Otherwise, all words will be selected randomly.
+	    """*/
+		common = common?true:false;
+	    var word_list;
+	    if (common)
+	        word_list = COMMON_WORDS;
+	    else
+	        word_list = [];
+	        
+	    var c = word_list.length;
+	    if (count > c){
+	    	word_list = word_list.concat( randomSample(WORDS, count-c) );
+	    }else{
+	        word_list = word_list.slice(0,count);
+	    } return word_list.join(' ');
+	};
+    _.fn.words = function(){
+        var args = arguments;
+        this.each(function(){
+            this.$ = _.words.apply(_,args);
+        });
+    };
+
+	_.titled = function(count, common){
+		//a convience function to upper case the resulting words
+		var title = [],
+		    words = _.words(count, common);
+		$.each(words.split(' '), function(pos, word){
+			title.push(word.charAt(0).toUpperCase()+word.slice(1));
+		}); return title.join(' ');
+	};
+    _.fn.titled = function(){
+        var args = arguments;
+        this.each(function(){
+            this.$ = _.titled.apply(_,args);
+        });
+    };
+    
+	 _.sentence = function(common){
 	    /*"""
 	    Returns a randomly generated sentence of lorem ipsum text.
 	
@@ -56,30 +101,53 @@
 	    """*/
 	    //# Determine the number of comma-separated sections and number of words in
 	    //# each section for this sentence.
-	    var sections = [];
-	    var range = randomNumber(1,5);
-	    for(var i=0;i<range;i++){
-	    	sections.push(randomSample(WORDS, randomNumber(3, 12)).join(' '));
-	    } var s = sections.join(', ');
+        common = common?true:false;
+	    var sections = [],
+	        range = randomNumber(8,15);
+        sections = _.words(range, common).split(' ');
+	    for(var i=0;i<sections.length-1;i++){
+	    	if(Math.random() < 0.15){
+                sections[i] += ',';
+            }
+	    } 
+        var s = sections.join(' ');
 	    //# Convert to sentence case and add end punctuation.
-	    return (s.charAt(0).toUpperCase() + s.slice(1) + randomLetter('?.'));
+	    return (s.charAt(0).toUpperCase() + s.slice(1) + '.');
 	};
+    _.fn.sentence = function(){
+        var args = arguments;
+        this.each(function(){
+            this.$ = _.sentence.apply(_,args);
+        });
+    };
 
-	_.paragraph = function(){
+	_.paragraph = function(common){
 	    /*"""
 	    Returns a randomly generated paragraph of lorem ipsum text.
 	
-	    The paragraph consists of between 1 and 4 sentences, inclusive.
+	    The paragraph consists of between 3 and 6 sentences, inclusive.
 	    """*/
-	    var paragraph = [];
-	    var range = randomNumber(1,4);
-	    for(var i=0;i<range;i++){
-	    	paragraph.push(_.sentence());
-	    } return paragraph.join(' ');
+        common = common?true:false;
+	    var paragraph = [],
+	        range = randomNumber(3,6),
+            i;
+        if(common){   
+            paragraph.push(COMMON_P);
+        }else{
+    	    for(i=0;i<range;i++){
+    	    	paragraph.push(_.sentence());
+    	    } 
+        }
+        return paragraph.join(' ');
 	};
+    _.fn.paragraph = function(){
+        var args = arguments;
+        this.each(function(){
+            this.$ = _.paragraph.apply(_,args);
+        });
+    };
 
 	_.paragraphs = function(count, common){
-		common = (common===null)?true:common;
 	    /*"""
 	    Returns a list of paragraphs as returned by paragraph().
 	
@@ -87,6 +155,7 @@
 	    'lorem ipsum' paragraph. Otherwise, the first paragraph will be random
 	    Latin text. Either way, subsequent paragraphs will be random Latin text.
 	    """*/
+        common = common?true:false;
 	    var paras = [];
 	    for ( var i=0; i<count;i++){
 	        if (common && i == 0)
@@ -95,49 +164,25 @@
 	            paras = paras.concat(_.paragraph());
 	    } return paras;
 	};
-
-	_.words = function(count, common){
-		common = (common===null)?true:common;
-	    /*"""
-	    Returns a string of `count` lorem ipsum words separated by a single space.
-	
-	    If `common` is True, then the first 19 words will be the standard
-	    'lorem ipsum' words. Otherwise, all words will be selected randomly.
-	    """*/
-	    var word_list;
-	    if (common)
-	        word_list = COMMON_WORDS;
-	    else
-	        word_list = [];
-	        
-	    var c = word_list.length;
-	    var i;
-	    if (count > c){
-	    	word_list = word_list.concat( randomSample(WORDS, count-c) );
-	    }else{
-	        word_list = word_list.splice(0,count);
-	    } return word_list.join(' ');
-	};
-
-	_.titled = function(count, common){
-		//a convience function to upper case the resulting words
-		var title = [];
-		var words = _.words(count, common);
-		$.each(words.split(' '), function(pos, word){
-			title.push(word.charAt(0).toUpperCase()+word.slice(1));
-		}); return title.join(' ');
-	};
+    _.fn.paragraphs = function(){
+        var args = arguments;
+        this.each(function(){
+            this.$ = _.paragraphs.apply(_,args);
+        });
+    };
 	
 	var randomSample = function(array, count){
-		var randomArray = [];
-		for(var i=0;i<count;i++){
+		var i,randomArray = [];
+		for(i=0;i<count;i++){
 			randomArray.push(array[randomNumber(0, array.length)]);
-		} return randomArray;
+		} 
+        return randomArray;
 	};
 	
 	var randomNumber = function(startRange, endRange){
-		var range = endRange - startRange;
-		return Math.ceil(Math.random()*range);
+		var range = endRange - startRange,
+        randomNumber = endRange - Math.ceil(Math.random()*range);
+		return randomNumber;
 	};
 	
 	var randomLetter = function(letters){

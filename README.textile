@@ -1,0 +1,56 @@
+h1. jquery-loremipsum;
+
+jquery-loremipsum is a port of the django loremipsum utility for quickly filling out your application 
+templates with content so you can tweak layout etc.  it is a jquery-jspath plugin so it uses the underscore
+instead of the dollar sign.
+
+h3. how about a useful example before i loose interest
+
+ok how about this one
+
+<pre><code>
+$('h1, h2, h3').each(_.titled(2));
+$('p').each(_.paragraph());
+/*
+<h2>Vel Deleniti</h2>
+<h2>Consectetur Quasi</h2>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
+velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
+id est laborum.
+</p>
+<h3>Impedit Ipsum</h3>
+<p>
+Asperiores ab earum eius laborum voluptatem consequatur, illum, minima. 
+Illo sequi sapiente voluptate quibusdam ducimus cupiditate aliquam atque 
+atque. Enim officiis accusantium accusamus, laboriosam ullam excepturi 
+ullam officia tempora, fuga delectus veritatis eum. Impedit, repudiandae 
+praesentium, molestiae, dolore, veritatis rem enim voluptates, quidem 
+eum pariatur deleniti voluptatum.
+</p>
+</code></pre>
+
+nice!  
+
+h2. ready for more?
+checkout the example.html!
+
+also check out these 
+jquery-jspath plugins:
+
+* http://github.com/thatcher/jquery-jspath
+* http://github.com/thatcher/jquery-json
+* http://github.com/thatcher/jquery-loremipsum
+* http://github.com/thatcher/jquery-objtree
+* http://github.com/thatcher/jquery-xslt
+
+qlso please check out the spec for each plugin (test/test.html).  special thanks to aaron quint for the 
+jqunit-spec plugin that all of these plugins use!
+
+
+
+

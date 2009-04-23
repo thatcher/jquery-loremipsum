@@ -68,7 +68,7 @@
 
     // asserts that the method is defined (like respond_to?)
     defined: function(object, method) {
-      return jqUnit.ok(typeof object[method] == 'function', method + 'is not defined on' + object);
+      return jqUnit.ok($.isFunction(object[method]), method + ' is defined');
     },
 
     // asserts that the object is of a certain type

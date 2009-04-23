@@ -25,8 +25,8 @@
 	        	//An Uppercased title for the document
 	        	document.title = "jQuery " + _.titled(3,false);
 	        	
-	        	//5 words 
-	        	$("#header00").text(_.words(5));
+	        	//5 words from the standard lorem ipsum list
+	        	$("#header00").text(_.words(5, true));
 	        	
 	        	//5 words all ways the same
 	        	$("#sentence00").text(_.sentence());
@@ -35,11 +35,11 @@
 	        	$("#paragraph00").text(_.paragraph());
 	        	
 	        	//2 'uncommon' words 
-	        	$("#header01").text(_.titled(2, false));
+	        	$("#header01").text(_.titled(2));
 	        	
 	        	//some random words for a list
 	        	$("#wordlist00 li").each(function(){
-	        		$(this).text(_.words(3, false));
+	        		$(this).text(_.words(3));
 	        	});
 	        	
 	        	//some paragraphs
