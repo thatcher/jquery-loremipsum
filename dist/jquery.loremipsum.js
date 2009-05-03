@@ -1,5 +1,5 @@
 /**
- * @VERSION@ 
+ * jquery.loremipsum.1.0.rc0 
  * 
  * Copyright (c) 2008-2009 Chris Thatcher (claypooljs.com)
  * Dual licensed under the MIT (MIT-LICENSE.txt)

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jquery-loremipsum" default="default" basedir=".">
+    <description>Builds, tests, and runs the project.</description>
+    
+    <!-- BASIC PROJECT PROPERTIES TO HELP TRACK VERSION -->
+    <property name="PROJECT_TITLE"            value="jquery.loremipsum" />
+    <property name="BUILD_MAJOR"              value="1" />
+    <property name="BUILD_MINOR"              value="0" />
+    <property name="BUILD_ID"                 value="rc0" />
+    <property name="RELEASE"                    
+              value="${PROJECT_TITLE}.${BUILD_MAJOR}.${BUILD_MINOR}.${BUILD_ID}" />
+
+    <property name="PREFIX"         
+              location="${basedir}/"                  
+              description="Target parent folder for built files"/>
+    <property name="SRC_DIR"        
+              location="${PREFIX}/src"                
+              description="Folder for source files"  />
+    <property name="TEST_DIR"       
+              location="${PREFIX}/test"               
+              description="Folder for test target"  />
+    <property name="DIST_DIR"       
+              location="${PREFIX}/dist"               
+              description="Folder for concat and min target" />
+
+    <!-- Files names for distribution -->
+    <property name="SOURCE"   			
+              value="${PROJECT_TITLE}.js" />
+    <property name="DIST"   			
+              location="${DIST_DIR}/${PROJECT_TITLE}.js" />
+    <property name="MIN"   		
+              location="${DIST_DIR}/${PROJECT_TITLE}.min.js" />
+    
+    <!-- Plugin File Names for Distribution -->
+    
+    <!-- BUILD TARGETS -->
+    <target name="default" depends="concat"/>
+    
+    <target name="clean">
+        <delete dir="${DIST_DIR}" />
+    </target>
+    
+    <target name="concat" description="Main claypool build">
+        <mkdir dir="${DIST_DIR}" />
+        <echo message="Building ${DIST}" />
+        <concat destfile="${DIST}">
+            <filterchain>    
+                <replacetokens>
+                    <token key="VERSION" value="${RELEASE}"/>
+                </replacetokens>
+            </filterchain>
+            <fileset dir="${basedir}"    includes="${SOURCE}" />
+        </concat>
+        <echo message="${DIST} built." />
+    </target>
+
+    
+    <target name="min" depends="concat" >
+        <echo message="Compressing Distibution" />
+        <java jar="${YUI_MIN_JAR}" fork="true">
+            <arg value="--charset=utf8"/>
+            <arg value="--line-break"/>
+            <arg value="8000"/>
+            <arg value="-o"/>
+            <arg value="${CLAYPOOL_ALL_MIN}"/>
+            <arg value="${CLAYPOOL_ALL}" />
+            <classpath>
+                <pathelement location="${RHINO_JAR}"/>
+            </classpath>
+        </java>
+        <echo message="Finished Compressing Distibution" />
+    </target>
+    
+</project>
